@@ -1,0 +1,102 @@
+.main-div-login-signup {
+    align-items: center;
+    position: absolute;
+    height: 500px;
+    width: 350px;
+    margin: 0 auto;
+    background-color: rgb(231, 230, 230);
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -175px;
+    border-radius: 10px;
+    border: 1px solid rgb(223, 222, 222);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+    opacity: 0.9;
+}
+
+.login-icon{
+    position: relative;
+    left: 90px;
+    top: 30px;
+    margin-bottom: 60px;
+    height: 56px;
+    width: 171px;
+}
+
+.input-login {
+    position: relative;
+    text-align: center;
+    width: 300px;
+    left: 25px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+    border: 3px solid #e1e0e0;
+    border-radius: 5px;
+    outline: none;
+    
+}
+
+.input-login:focus {
+
+    border: 3px solid #e0a3a3;
+}
+
+.input-button {
+    position: relative;
+    margin-top: 10px;
+    height: 40px;
+    width: 150px;
+    left: 100px;
+    border: none;
+    font-size: 12px;
+    color: rgb(181, 47, 47);
+
+}
+
+.input-button:hover{
+    background-color: #e0a3a3;
+    color: white;
+}
+
+.icons-div{
+    padding-top: 100px;
+    padding-left: 70px;
+    display: flex;
+    
+}
+
+.icon-div{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+
+.forgetPassword{
+    text-decoration: none;
+    color: rgb(31, 20, 20);
+    display: block;
+    text-align: right;
+    margin-right: 22px;
+    font-size: 10.5px;
+    padding: 5px 20px 4px 4px;
+}
+
+.signUp{
+    text-decoration: none;
+    color: rgb(31, 20, 20);
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px 0px 4px 0px;
+}
+
+.social-icon{
+    height: 50px;
+    width: 50px;
+}
+
+a{
+    text-decoration: none;
+
+}
