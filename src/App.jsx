@@ -5,7 +5,7 @@ import { LoginContext } from "./Contexts/Loginctx";
 
 function App() {
 
-  const [login, setLogin] = useState("Hugo");
+  const [login, setLogin] = useState("");
   
 
   return (

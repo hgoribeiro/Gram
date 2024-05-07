@@ -14,10 +14,11 @@ import gram.com.Model.User;
 import gram.com.Model.UserRoles;
 import gram.com.Model.DTOs.Requests.SignUpDTORequest;
 import gram.com.Model.DTOs.Requests.UserDTORequest;
-import gram.com.Model.DTOs.Responses.UserDtoResponse;
+import gram.com.Model.DTOs.Responses.LoggedUserDtoResponse;
 import gram.com.Security.TokenService;
 import gram.com.Services.GramService;
 
+@CrossOrigin (origins= "http://localhost:5176")
 @RestController
 @RequestMapping("/login")
 public class AuthController {
@@ -51,7 +52,7 @@ public class AuthController {
         var token = tokenService.generatedToken((User)authentication.getPrincipal());
         
         
-        return  ResponseEntity.ok(new UserDtoResponse(token));
+        return  ResponseEntity.ok(new LoggedUserDtoResponse(token));
     }
 
     @PostMapping("/signup")
@@ -68,9 +69,9 @@ public class AuthController {
 
     }
 
-    @GetMapping("/finduser")
-    public UserDetails findUsuario(@RequestBody @Validated String username) {
-        return service.loadUserByUsername(username);
+    @GetMapping("/finduser/{user}")
+    public ResponseEntity<?> findUsuario(@PathVariable String user) throws InterruptedException {
+        return service.findByLogin(user);
     }
 
     @GetMapping("/vac")
