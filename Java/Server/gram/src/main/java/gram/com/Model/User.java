@@ -43,13 +43,17 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private String id;
-    @Column(name = "login")
+    @Column(name = "email")
     private String login;
     @Column(name = "password")
     private String password;
-    //@Column(name = "role", columnDefinition = "Varchar")
     @Enumerated(EnumType.STRING)
     private UserRoles role;
+    @Column(name = "name")
+    private String nome;
+    @Column(name = "lastName")
+    private String sobrenome;
+
 
     public String getId() {
         return id;
@@ -86,7 +90,7 @@ public class User implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRoles.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER") );
-        else return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

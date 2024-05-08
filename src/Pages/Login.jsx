@@ -10,9 +10,11 @@ import { apiConsummer } from '../Services/Consumer'
 export const Login = () => {
 
     const [password, setPassword] = useState("");
-    const { login } = useContext(LoginContext);
-    const { setLogin } = useContext(LoginContext);
     const [disableButton, setdisableButton] = useState(false)
+
+    const { login,setLogin } = useContext(LoginContext);
+    const {userToken, setUserToken } = useContext(LoginContext);
+    
 
 
     const getLoginForm = (e) => {
@@ -27,17 +29,15 @@ export const Login = () => {
         e.preventDefault();
         setdisableButton(true);
         apiConsummer.post("login/auth",{login,password})
-            .then((res) => {
-                
-                console.log(res)
-
+            .then((response) => {
+                setUserToken(response.data.token);
+                localStorage.setItem("token",response.data.token);        
             })
-            .catch((res) => {
+            .catch((error) => {
                 setdisableButton(false);
-                console.log(res);
-
-
+                console.log(error);
             })
+           
 
     }
 
