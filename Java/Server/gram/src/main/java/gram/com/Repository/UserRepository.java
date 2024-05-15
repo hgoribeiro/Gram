@@ -6,5 +6,5 @@ import org.springframework.security.core.userdetails.UserDetails;
 import gram.com.Model.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
-    UserDetails findByLogin(String Login);
+    UserDetails findByEmail(String email);
 }

@@ -22,18 +22,23 @@ import jakarta.persistence.Table;
 
 public class User implements UserDetails{
     
-    public User(String login, String password, UserRoles role) {
-        this.login = login;
+  
+
+    public User(String email, String password, UserRoles role, String nome, String sobrenome) {
+        this.email = email;
         this.password = password;
         this.role = role;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
     }
 
-    public User(String id, String login, String password, UserRoles role) {
-        
+    public User(String id, String email, String password, UserRoles role, String nome, String sobrenome) {
         this.id = id;
-        this.login = login;
+        this.email = email;
         this.password = password;
         this.role = role;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
     }
 
     public User()  {
@@ -44,7 +49,7 @@ public class User implements UserDetails{
     @Column(name = "id")
     private String id;
     @Column(name = "email")
-    private String login;
+    private String email;
     @Column(name = "password")
     private String password;
     @Enumerated(EnumType.STRING)
@@ -63,12 +68,12 @@ public class User implements UserDetails{
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String login) {
+        this.email = login;
     }
 
     public String getPassword() {
@@ -95,7 +100,7 @@ public class User implements UserDetails{
 
     @Override
     public String getUsername() {
-        return login;
+        return email;
     }
 
     @Override

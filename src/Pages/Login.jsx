@@ -6,19 +6,23 @@ import emailicon from '/email.png'
 import { useState, useContext } from 'react'
 import { LoginContext } from '../Contexts/Loginctx'
 import { apiConsummer } from '../Services/Consumer'
+import { islogged, USER_TOKEN_KEY } from '../Components/logged'
+import {useNavigate } from 'react-router-dom'
+
 
 export const Login = () => {
+    const navigate = useNavigate();
 
     const [password, setPassword] = useState("");
     const [disableButton, setdisableButton] = useState(false)
 
-    const { login,setLogin } = useContext(LoginContext);
+    const { email,setEmail } = useContext(LoginContext);
     const {userToken, setUserToken } = useContext(LoginContext);
     
 
 
-    const getLoginForm = (e) => {
-        setLogin(e.target.value);
+    const getEmailForm = (e) => {
+        setEmail(e.target.value);
     }
 
     const getPasswordForm = (e) => {
@@ -28,14 +32,15 @@ export const Login = () => {
     const submitForm = (e) => {
         e.preventDefault();
         setdisableButton(true);
-        apiConsummer.post("login/auth",{login,password})
+        apiConsummer.post("login/auth",{email,password})
             .then((response) => {
                 setUserToken(response.data.token);
-                localStorage.setItem("token",response.data.token);        
+                localStorage.setItem(USER_TOKEN_KEY,response.data.token); 
+                navigate("/feed")       
             })
             .catch((error) => {
                 setdisableButton(false);
-                console.log(error);
+                alert("Usuário não encontrado!");
             })
            
 
@@ -48,7 +53,7 @@ export const Login = () => {
                 <img className='login-icon' src={loginicon}></img>
             </div>
             <form>
-                <input onChange={getLoginForm} name="login" type='text' placeholder='Digite o seu login' className='input-login'></input>
+                <input onChange={getEmailForm} name="email" type='text' placeholder='Digite o seu email' className='input-login'></input>
                 <input onChange={getPasswordForm} name="senha" type='password' placeholder='Digite o sua senha' className='input-login'></input>
                 <div className='forgetPassword'>
                     <a href='#'>Esqueceu sua senha? </a>

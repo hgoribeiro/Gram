@@ -5,12 +5,12 @@ import { LoginContext } from "./Contexts/Loginctx";
 
 function App() {
 
-  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
   const [userToken, setUserToken] = useState("invalidtoken");
   
 
   return (
-      <LoginContext.Provider value={{login, setLogin, userToken, setUserToken}}>
+      <LoginContext.Provider value={{email, setEmail, userToken, setUserToken}}>
       <Switch></Switch>
       </LoginContext.Provider>
   )

@@ -1,7 +1,6 @@
 package gram.com.Model.DTOs.Requests;
 
-import gram.com.Model.UserRoles;
 
-public record SignUpDTORequest(String login, String password) {
+public record SignUpDTORequest(String email, String password, String name, String lastname) {
     
 }

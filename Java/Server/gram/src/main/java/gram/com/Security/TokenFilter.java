@@ -27,10 +27,10 @@ public class TokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String token = this.recoverToken(request);
         if(token!=null){
-            String login = tokenService.ValidateToken(token);
-            UserDetails user = userRepository.findByLogin(login);
+            String email = tokenService.ValidateToken(token);
+            UserDetails user = userRepository.findByEmail(email);
 
-            UsernamePasswordAuthenticationToken authentication =  new UsernamePasswordAuthenticationToken(login, null, user.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication =  new UsernamePasswordAuthenticationToken(email, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);

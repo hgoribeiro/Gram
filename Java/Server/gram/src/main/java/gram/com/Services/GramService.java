@@ -22,13 +22,13 @@ public class GramService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByLogin(username);
+        return userRepository.findByEmail(username);
     }
 
     
     public ResponseEntity<?> findByLogin(String username) throws InterruptedException{
         Thread.sleep(2000);
-        user = userRepository.findByLogin(username);
+        user = userRepository.findByEmail(username);
         if (user == null)
             return new ResponseEntity<>(new Mensages("User not Found"), HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(new UserDTOResponse(user.getUsername()), HttpStatus.OK);

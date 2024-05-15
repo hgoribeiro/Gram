@@ -18,7 +18,7 @@ import gram.com.Model.DTOs.Responses.LoggedUserDtoResponse;
 import gram.com.Security.TokenService;
 import gram.com.Services.GramService;
 
-@CrossOrigin (origins= "http://localhost:5176")
+@CrossOrigin (origins= "http://localhost:5173")
 @RestController
 @RequestMapping("/login")
 public class AuthController {
@@ -46,7 +46,7 @@ public class AuthController {
          * comparação direta te permite realizar HTTPSresposes personalizadas
          */
 
-        UsernamePasswordAuthenticationToken userpass = new UsernamePasswordAuthenticationToken(request.login(),
+        UsernamePasswordAuthenticationToken userpass = new UsernamePasswordAuthenticationToken(request.email(),
                 request.password());
         Authentication authentication = this.authenticationManager.authenticate(userpass);
         var token = tokenService.generatedToken((User)authentication.getPrincipal());
@@ -57,15 +57,19 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity signup(@RequestBody @Validated SignUpDTORequest request) {
-        if (service.loadUserByUsername(request.login()) != null)
+        
+        if (service.loadUserByUsername(request.email()) != null)
             return ResponseEntity.badRequest().build();
 
         String encryptedPass = new BCryptPasswordEncoder().encode(request.password());
-        User user = new User(request.login(), encryptedPass, UserRoles.USER); // o cadastro feito pelo add é sempre de
-                                                                              // "user". Cadastros de Admin são feitos
-                                                                              // manualmente
+        User user = new User(request.email(), encryptedPass, UserRoles.USER, request.name(),request.lastname()); 
+        // o cadastro feito pelo add é sempre de
+        // "user". Cadastros de Admin são feitos
+        // manualmente no banco de dados
+        
         service.addUser(user);
         return ResponseEntity.ok().build();
+       
 
     }
 
