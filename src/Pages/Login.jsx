@@ -7,7 +7,7 @@ import { useState, useContext } from 'react'
 import { LoginContext } from '../Contexts/Loginctx'
 import { apiConsummer } from '../Services/Consumer'
 import { islogged, USER_TOKEN_KEY } from '../Components/logged'
-import {useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 export const Login = () => {
@@ -16,9 +16,9 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const [disableButton, setdisableButton] = useState(false)
 
-    const { email,setEmail } = useContext(LoginContext);
-    const {userToken, setUserToken } = useContext(LoginContext);
-    
+    const { email, setEmail } = useContext(LoginContext);
+    const { userToken, setUserToken } = useContext(LoginContext);
+
 
 
     const getEmailForm = (e) => {
@@ -32,23 +32,25 @@ export const Login = () => {
     const submitForm = (e) => {
         e.preventDefault();
         setdisableButton(true);
-        apiConsummer.post("login/auth",{email,password})
+        apiConsummer.post("login/auth", { email, password })
             .then((response) => {
                 setUserToken(response.data.token);
-                localStorage.setItem(USER_TOKEN_KEY,response.data.token); 
-                navigate("/feed")       
+                localStorage.setItem(USER_TOKEN_KEY, response.data.token);
+                navigate("/feed")
             })
             .catch((error) => {
                 setdisableButton(false);
                 alert("Usuário não encontrado!");
             })
-           
+
 
     }
 
     return (
 
+
         <div className="main-div-login-signup">
+
             <div className='login-icon-div'>
                 <img className='login-icon' src={loginicon}></img>
             </div>

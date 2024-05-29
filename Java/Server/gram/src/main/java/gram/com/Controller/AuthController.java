@@ -18,7 +18,7 @@ import gram.com.Model.DTOs.Responses.LoggedUserDtoResponse;
 import gram.com.Security.TokenService;
 import gram.com.Services.GramService;
 
-@CrossOrigin (origins= "http://localhost:5173")
+@CrossOrigin (origins= "http://localhost:5174")
 @RestController
 @RequestMapping("/login")
 public class AuthController {

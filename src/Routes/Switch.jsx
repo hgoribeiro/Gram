@@ -11,6 +11,7 @@ const index = () => {
         <Routes>
         <Route path='/' element = {<Login/>}/>
             <Route path='/login' element = {<Login/>}/>
+            <Route path='/feedteste' element = {<Feed/>}/>
             <Route path='/feed' element = {
             <PrivateRoutes>
               <Feed/>
