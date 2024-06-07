@@ -12,10 +12,9 @@ import gram.com.Model.User;
 import gram.com.Model.DTOs.Responses.UserDTOResponse;
 import gram.com.Repository.UserRepository;
 
-
 @Service
-public class GramService implements UserDetailsService{
-    
+public class GramService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
     UserDetails user;
@@ -25,17 +24,18 @@ public class GramService implements UserDetailsService{
         return userRepository.findByEmail(username);
     }
 
-    
-    public ResponseEntity<?> findByLogin(String username) throws InterruptedException{
-        Thread.sleep(2000);
-        user = userRepository.findByEmail(username);
-        if (user == null)
-            return new ResponseEntity<>(new Mensages("User not Found"), HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(new UserDTOResponse(user.getUsername()), HttpStatus.OK);
+    public User findByLoginOrEmail(String login, String email) {
+        return (userRepository.findByLoginOrEmail(login, email));
+
+    }
+
+    public User findByLogin(String username)  {
+        return userRepository.findByLogin(username);
+        
     }
 
     public void addUser(User user) {
         userRepository.save(user);
     }
-    
+
 }

@@ -20,7 +20,7 @@ export const Feed = () => {
                     <img className='pl-4 h-14 w-44 my-2' src={loginicon}></img>
                 </div>
                 
-                    <nav className="w-full" >
+                    <nav className="flex flex-1" >
                         <ul className="flex flex-1 h-full max-w-7xl justify-end ">
                             <li className="text-2xl my-auto">
                                 <a className="text-2xl ml-5 " href="#">Nome</a></li>

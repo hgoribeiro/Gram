@@ -31,7 +31,9 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(authorize -> authorize
             .requestMatchers(HttpMethod.POST, "/login/auth").permitAll()
             .requestMatchers(HttpMethod.POST, "/login/signup").permitAll()
-            .requestMatchers(HttpMethod.GET, "/login/vac").hasRole("USER")
+            //.requestMatchers(HttpMethod.GET, "/login/vac").hasRole("USER")
+            .requestMatchers(HttpMethod.GET, "/login/vac").permitAll()
+            .requestMatchers(HttpMethod.GET, "/login/find/*").permitAll()
             //.anyRequest().authenticated()
             //.anyRequest().permitAll()
         

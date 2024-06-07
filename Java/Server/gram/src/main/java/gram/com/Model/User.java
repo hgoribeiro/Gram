@@ -1,13 +1,14 @@
 package gram.com.Model;
 
-
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import gram.com.Model.Emuns.UserRoles;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,16 +16,16 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity(name = "users")
 @Table(name = "users")
 
-public class User implements UserDetails{
-    
-  
+public class User implements UserDetails {
 
-    public User(String email, String password, UserRoles role, String nome, String sobrenome) {
+    public User(String login, String email, String password, UserRoles role, String nome, String sobrenome) {
+        this.login = login;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -32,8 +33,8 @@ public class User implements UserDetails{
         this.sobrenome = sobrenome;
     }
 
-    public User(String id, String email, String password, UserRoles role, String nome, String sobrenome) {
-        this.id = id;
+    public User(int id, String login, String email, String password, UserRoles role, String nome, String sobrenome) {
+        this.user_id = id;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -41,15 +42,57 @@ public class User implements UserDetails{
         this.sobrenome = sobrenome;
     }
 
-    public User()  {
+    public User() {
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private int user_id;
+    @Column(name = "login")
+    private String login;
     @Column(name = "email")
     private String email;
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
     @Column(name = "password")
     private String password;
     @Enumerated(EnumType.STRING)
@@ -58,14 +101,19 @@ public class User implements UserDetails{
     private String nome;
     @Column(name = "lastName")
     private String sobrenome;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
 
-    public String getId() {
-        return id;
+
+
+    public int getId() {
+        return user_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int id) {
+        this.user_id = id;
     }
 
     public String getEmail() {
@@ -94,8 +142,10 @@ public class User implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRoles.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER") );
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if (this.role == UserRoles.ADMIN)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

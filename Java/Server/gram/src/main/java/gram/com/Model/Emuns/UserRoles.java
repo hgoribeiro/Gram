@@ -1,4 +1,4 @@
-package gram.com.Model;
+package gram.com.Model.Emuns;
 
 public enum UserRoles {
     ADMIN("ADMIN"),
