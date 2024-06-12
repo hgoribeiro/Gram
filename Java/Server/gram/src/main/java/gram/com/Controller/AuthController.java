@@ -82,9 +82,4 @@ public class AuthController {
         
     }
 
-    @GetMapping("/vac")
-    public String vac() {
-        return "true";
-    }
-
 }

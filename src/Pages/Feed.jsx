@@ -37,7 +37,14 @@ export const Feed = () => {
                     AAAAAAAAAA
                 </div>
                 <div className="flex-1 justify-center items-center bg-orange-600 mx-auto my-0 max-w-7xl ml-0 h-screen">
-                    BBBBBBBBBBB
+                    <div className="grid gap-4">
+                        <div className="bg-slate-700">oi</div>
+                        <div className="bg-slate-700">oi</div>
+                        <div className="bg-slate-700">oi</div>
+                        <div className="bg-slate-700">oi</div>
+                        <div className="bg-slate-700">oi</div>
+                        <div className="bg-slate-700">oi</div>
+                    </div>
                 </div>
             </div>
         </div >
